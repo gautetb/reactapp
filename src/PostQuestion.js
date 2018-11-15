@@ -33,11 +33,22 @@ export class PostQuestion extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: json.stringify({
+            body: JSON.stringify({
                 title: this.state.postTitle,
                 details: this.state.postDetails
             })
         }).then((Response) => Response.json())
+            .then((findresponse) => {
+                this.props.upDateParent.bind(this);
+                alert(findresponse.result);
+            })  
+    }
+
+
+    postSubmit(event) {
+        event.preventDefault();
+        fetch('http://localhost:60655/api/Question').
+        then((Response) => Response.json())
             .then((findresponse) => {
               //  this.props.upDateParent.bind(this);
               //  alert(findresponse.result);
