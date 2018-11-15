@@ -33,14 +33,17 @@ export class PostQuestion extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
+            body: json.stringify({
                 title: this.state.postTitle,
                 details: this.state.postDetails
             })
         }).then((Response) => Response.json())
             .then((findresponse) => {
-                alert(findresponse.result);
+              //  this.props.upDateParent.bind(this);
+              //  alert(findresponse.result);
             })
+
+            
     }
 
 

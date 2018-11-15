@@ -43,7 +43,7 @@ export class QuestionList extends React.Component {
                             ))
                         }
                     </ul>
-                    <PostQuestion updateParent={this.updateState.bind(this)}/>
+                    <PostQuestion updateParent={this.componentDidMount}/>
                 </div>
             )
         }
