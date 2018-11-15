@@ -10,9 +10,16 @@ export class QuestionList extends React.Component {
             isLoaded: false,
             shown: true
         }
+        
+        this.fetchData = this.fetchData.bind(this)
     }
 
     componentDidMount() {
+        this.fetchData();
+    }
+
+    fetchData() {
+        console.log('fetchData called');
         fetch("http://localhost:60655/api/Question").then(res => res.json()).then(json => {
             this.setState({
                 isLoaded: true,
@@ -43,7 +50,7 @@ export class QuestionList extends React.Component {
                             ))
                         }
                     </ul>
-                    <PostQuestion updateParent={this.componentDidMount}/>
+                    <PostQuestion fetchList={this.fetchData}/>
                 </div>
             )
         }

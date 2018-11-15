@@ -37,26 +37,29 @@ export class PostQuestion extends React.Component {
                 title: this.state.postTitle,
                 details: this.state.postDetails
             })
-        }).then((Response) => Response.json())
-            .then((findresponse) => {
-                this.props.upDateParent.bind(this);
-                alert(findresponse.result);
-            })  
+        }).then(res => {
+            if(res.ok)
+                this.props.fetchList.bind(this);
+                console.log('postsubmit');
+        }); 
     }
 
-
+/*
     postSubmit(event) {
         event.preventDefault();
-        fetch('http://localhost:60655/api/Question').
+        fetch('http://localhost:60655/api/Question', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }).
         then((Response) => Response.json())
             .then((findresponse) => {
-              //  this.props.upDateParent.bind(this);
-              //  alert(findresponse.result);
+                this.props.fetchData();
+                alert(findresponse.result);
             })
-
-            
-    }
-
+    } 
+*/
 
     render() {
         return(
