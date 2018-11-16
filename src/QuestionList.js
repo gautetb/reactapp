@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import {PostAnswer} from './Answer';
+import { PostAnswer } from './Answer';
 import { PostQuestion } from './PostQuestion';
 
 export class QuestionList extends React.Component {
@@ -10,7 +10,7 @@ export class QuestionList extends React.Component {
             isLoaded: false,
             shown: true
         }
-        
+
         this.fetchData = this.fetchData.bind(this)
     }
 
@@ -28,10 +28,6 @@ export class QuestionList extends React.Component {
         })
     }
 
-    updateState() {
-        this.setState ({shown: false});
-    }
-
     render() {
         const { isLoaded, items } = this.state;
 
@@ -39,19 +35,32 @@ export class QuestionList extends React.Component {
             return <div>Loading..</div>;
         } else {
             return (
-                <div className="App">
-                    <ul>
-                        {
-                            items.map(e => (
-                                <div>                                
-                                    <li key={e.id}>Tittel: {e.title} svar: {e.answers.map(i => (<li key={i.id}>{i.text}</li>))}</li>
-                                    <PostAnswer Question={e.id}/>
-                                </div>
-                            ))
-                        }
-                    </ul>
-                    <PostQuestion fetchList={this.fetchData}/>
-                </div>
+                
+
+<div id="accordion">
+<PostQuestion fetchData={this.fetchData}/>
+{items.map(e => (
+                               
+<div className="card">
+    <div className="card-header" id="headingOne">
+      <h5 className="mb-0">
+        <button className="btn btn-link" data-toggle="collapse" data-target={'#collapse'+1+e.id} aria-expanded="true" aria-controls={'collapse'+1+e.id}>
+        {e.title}
+        </button>
+      </h5>
+    </div>
+
+    <div id={'collapse'+1+e.id} className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div className="card-body">
+      {e.answers.map(i => (<li key={i.id}>{i.text}</li>))}
+        </div>
+        <PostAnswer Question={e.id}/>
+    </div>
+  </div>
+
+))}
+
+</div>
             )
         }
     }

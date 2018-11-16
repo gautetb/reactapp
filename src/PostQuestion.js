@@ -13,7 +13,6 @@ export class PostQuestion extends React.Component {
             this.postDetails = this.postDetails.bind(this);
             this.changePostTitle = this.changePostTitle.bind(this);
             this.postSubmit = this.postSubmit.bind(this);
-
         
     }
 
@@ -39,27 +38,10 @@ export class PostQuestion extends React.Component {
             })
         }).then(res => {
             if(res.ok)
-                this.props.fetchList.bind(this);
+                this.props.fetchData();
                 console.log('postsubmit');
         }); 
     }
-
-/*
-    postSubmit(event) {
-        event.preventDefault();
-        fetch('http://localhost:60655/api/Question', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }).
-        then((Response) => Response.json())
-            .then((findresponse) => {
-                this.props.fetchData();
-                alert(findresponse.result);
-            })
-    } 
-*/
 
     render() {
         return(
@@ -85,9 +67,6 @@ export class PostQuestion extends React.Component {
                     <label className="col-md-4 control-label" ></label>
                     <div className="col-md-4">
                     <button type="submit"  onClick={this.postSubmit}  className="btn btn-primary">Button</button>
-                    </div>
-                    <div className="col-md-4">
-                    <button type="submit" onClick={this.props.upDateParent}  className="btn btn-primary">Update</button>
                     </div>
                 </div>
             </fieldset>
